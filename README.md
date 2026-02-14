@@ -1,100 +1,85 @@
-# AI-Driven Edge Monitoring and Compliance System
+# 🎧 AI-Driven Edge Monitoring and Compliance System
 
-An embedded TinyML-based environmental sound classification system designed to detect policy-violating noise events in residential societies. The system performs real-time audio classification on-device and automatically generates structured logs and compliance alerts without cloud dependency.
+<p align="center">
 
----
+![TinyML](https://img.shields.io/badge/TinyML-Enabled-blue)
+![ESP32](https://img.shields.io/badge/ESP32-Edge%20Device-red)
+![Accuracy](https://img.shields.io/badge/Accuracy-90%25-brightgreen)
+![Inference](https://img.shields.io/badge/Inference-5ms-orange)
+![Model Size](https://img.shields.io/badge/Model%20Size-14KB-blueviolet)
+![RAM](https://img.shields.io/badge/Peak%20RAM-9.5KB-yellow)
 
-## Overview
+</p>
 
-This project addresses the common issue of excessive noise in residential areas where residents often lack evidence to file formal complaints.
-
-The system uses an ESP32 microcontroller with an INMP441 I2S microphone to:
-
-* Classify environmental audio (party music, speech, construction, silence)
-* Detect threshold-based violations
-* Record audio evidence
-* Generate timestamped logs
-* Send structured email alerts to concerned authorities
-
-All inference runs locally on the device using a TinyML model optimized for low memory and latency constraints.
+A real-time **Edge AI-based environmental sound classification system** built on ESP32 using TinyML.
+Detects policy-violating noise events, logs structured evidence, and triggers automated compliance alerts — all without cloud dependency.
 
 ---
 
-## Key Features
+# 📌 Problem Statement
 
-* On-device real-time sound classification
-* 90% classification accuracy
-* 5ms inference latency
-* 14KB optimized TinyML model
-* 9.5KB peak RAM usage
-* 63KB flash consumption
-* Automated logging and evidence recording
-* Threshold-based violation detection
-* Email-based compliance reporting
-* Fully offline inference (no cloud dependency)
+In residential societies, excessive party noise often disturbs families.
+However, lack of recorded evidence makes formal complaints difficult.
 
----
+This system solves that by:
 
-## System Architecture
-
-1. Audio Capture
-
-   * INMP441 I2S microphone captures environmental sound
-   * Raw waveform streamed to ESP32
-
-2. Signal Processing
-
-   * Feature extraction performed using Edge Impulse DSP pipeline
-   * Audio transformed into ML-compatible feature vectors
-
-3. On-Device Inference
-
-   * TinyML model deployed on ESP32
-   * Classifies sound into predefined categories
-
-4. Violation Engine
-
-   * If classified as "party music" beyond threshold duration
-   * System triggers:
-
-     * Audio recording
-     * Log generation
-     * Email alert dispatch
+* Classifying environmental sounds
+* Detecting threshold violations
+* Recording evidence
+* Generating structured logs
+* Sending automated email alerts
 
 ---
 
-## Dataset
+# 🏗 System Architecture
+
+```mermaid
+flowchart LR
+A[INMP441 Microphone] --> B[ESP32]
+B --> C[Feature Extraction - Edge Impulse DSP]
+C --> D[TinyML Model Inference]
+D --> E{Violation Detected?}
+E -- Yes --> F[Record Audio]
+F --> G[Generate Log]
+G --> H[Send Email Alert]
+E -- No --> I[Continue Monitoring]
+```
+
+---
+
+# ⚙️ Workflow Overview
+
+```mermaid
+sequenceDiagram
+participant Mic as INMP441 Mic
+participant ESP as ESP32
+participant Model as TinyML Model
+participant Alert as Email System
+
+Mic->>ESP: Capture Audio Waveform
+ESP->>Model: Extract Features + Run Inference
+Model-->>ESP: Sound Classification
+ESP->>ESP: Threshold Evaluation
+ESP->>Alert: Send Structured Report (If Violation)
+```
+
+---
+
+# 🔬 Dataset & Training
 
 * 40,000+ custom-labeled audio waveform samples
-* Categories:
+* Classes:
 
-  * Party Music
-  * Talking
-  * Construction
-  * Silence
-* Data preprocessed and mapped using Python
-* Model trained and optimized via Edge Impulse
-
----
-
-## Hardware Components
-
-* ESP32 Microcontroller
-* INMP441 I2S MEMS Microphone
-* WiFi-enabled SMTP communication
+  * 🎉 Party Music
+  * 🗣 Talking
+  * 🚧 Construction
+  * 🔇 Silence
+* Data preprocessing and mapping using Python
+* Model trained and optimized using Edge Impulse
 
 ---
 
-## Software Stack
-
-* Python (data preprocessing and dataset preparation)
-* Edge Impulse (model training and TinyML optimization)
-* Arduino (firmware development in C++)
-* SMTP protocol for email alerts
-
----
-
-## Performance Metrics
+# 📊 Performance Metrics
 
 | Metric                  | Value           |
 | ----------------------- | --------------- |
@@ -103,38 +88,56 @@ All inference runs locally on the device using a TinyML model optimized for low 
 | Inference Latency       | 5ms             |
 | Peak RAM Usage          | 9.5KB           |
 | Flash Usage             | 63KB            |
-| Dataset Size            | 40,000+ samples |
+| Dataset Size            | 40,000+ Samples |
 
 ---
 
-## Optimization Strategy
+# 🧠 Optimization Strategy
 
-* Model quantization and pruning for reduced footprint
-* Efficient feature extraction pipeline
-* Memory-aware firmware design
+* Model quantization for memory efficiency
+* Feature extraction optimized for embedded execution
 * Threshold-based filtering to reduce false alerts
+* Fully offline inference (no cloud dependency)
+* Memory-aware firmware design in Arduino (C++)
 
 ---
 
-## Use Cases
+# 🛠 Hardware Components
 
-* Residential society noise monitoring
-* Automated compliance systems
-* Smart building monitoring
-* Edge AI for policy enforcement
-* Low-power embedded ML applications
+* ESP32 Microcontroller
+* INMP441 I2S MEMS Microphone
+* WiFi-based SMTP communication
 
 ---
 
-## Future Improvements
+# 💻 Software Stack
 
-* Multi-device distributed monitoring
-* Mobile dashboard for live tracking
-* Integration with cloud analytics
-* Adaptive threshold tuning
-* Expanded sound class detection
+* Python – Data preprocessing & dataset preparation
+* Edge Impulse – Model training & TinyML deployment
+* Arduino (C++) – Firmware & embedded logic
+* SMTP – Email alert automation
+
+---
+
+# 🚀 Key Highlights
+
+✔ Real-time on-device inference
+✔ Ultra-low memory footprint
+✔ Compliance-style structured reporting
+✔ Edge AI deployment under strict constraints
+✔ Practical TinyML production system
+
+---
+
+# 📈 Potential Extensions
+
+* Distributed multi-device monitoring
+* Real-time dashboard
+* Adaptive noise thresholds
+* Cloud-based analytics integration
+* Mobile notification system
 
 ---
 
 
-
+Tell me which style you want next 🔥
